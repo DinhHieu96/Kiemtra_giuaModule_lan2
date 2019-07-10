@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let Tivi = function (currentChannel, volume, status) {
+        this.curentChannel = currentChannel;
+        this.volume = volume;
+        this.status = status;
+        this.getCurrentChannel = function () {
+            return this.curentChannel;
+        };
+        this.getVolume = function () {
+            return this.volume;
+        };
+        this.getStatus = function () {
+            return this.status;
+        };
+        this.setCurrentChannel = function (currentChannel) {
+            this.curentChannel = currentChannel;
+        };
+        this.setVolume = function (volume) {
+            this.volume = volume;
+        };
+        this.setStatus = function (status) {
+            this.status = status;
+        };
+        this.moveChannel = function (numberChannel) {
+            this.curentChannel = numberChannel;
+        };
+        this.changeVolume = function (volume) {
+            this.volume += volume;
+        };
+    };
+    let Remote = function (id) {
+        this.id = id;
+        this.getId = function () {
+            return this.id;
+        };
+        this.setId = function (id) {
+            this.id = id;
+        };
+        this.moveChannel = function (tivi, numberChannel) {
+            tivi.moveChannel(numberChannel);
+        };
+        this.upVolume = function (tivi, volume) {
+            tivi.changeVolume(volume);
+        };
+        this.downVolume = function (tivi) {
+            tivi.changeVolume(-1);
+        };
+        this.turnOnOffTivi = function (tivi) {
+            tivi.status = !tivi.status;
+        };
+    };
+    let tivi1 = new Tivi(1, 30, false);
+    let remote1 = new Remote(1);
+    if (tivi1.getStatus() === false) {
+        remote1.turnOnOffTivi(tivi1);
+        console.log("Tivi đã bật" + "<br>");
+    }
+    tivi1.moveChannel(7);
+    console.log("Status: " + tivi1.getStatus() + " Tivi dang o kenh " + tivi1.getCurrentChannel() + " Volume: " + tivi1.getVolume() + "<br>");
+    remote1.moveChannel(tivi1, 3);
+    console.log("Status: " + tivi1.getStatus() + " Tivi dang o kenh " + tivi1.getCurrentChannel() + " Volume: " + tivi1.getVolume() + "<br>");
+    remote1.upVolume(tivi1, 2);
+    console.log("Status: " + tivi1.getStatus() + " Tivi dang o kenh " + tivi1.getCurrentChannel() + " Volume: " + tivi1.getVolume() + "<br>");
+    remote1.turnOnOffTivi(tivi1);
+    console.log("Status: " + tivi1.getStatus() + " Tivi dang o kenh " + tivi1.getCurrentChannel() + " Volume: " + tivi1.getVolume() + "<br>");
+    console.log("Tivi đã tắt");
+</script>
+</body>
+</html>
